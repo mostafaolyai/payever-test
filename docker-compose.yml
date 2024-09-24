@@ -1,0 +1,45 @@
+version: '3.8'
+
+services:
+  mongodb:
+    image: mongo:6.0.5
+    container_name: mongodbb
+    ports:
+      - "27017:27017"  # Exposes MongoDB on localhost:27017
+    volumes:
+      - mongo-data:/data/db  # Persists MongoDB data even after container restarts
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root  # Root user for MongoDB
+      MONGO_INITDB_ROOT_PASSWORD: password  # Password for the root user
+    networks:
+      - app-network
+
+  rabbitmq:
+    image: rabbitmq:3-management  # Includes RabbitMQ management UI
+    container_name: rabbitmqq
+    ports:
+      - "5672:5672"  # RabbitMQ default port
+      - "15672:15672"  # Management console available at localhost:15672
+    environment:
+      RABBITMQ_DEFAULT_USER: user
+      RABBITMQ_DEFAULT_PASS: password
+    networks:
+      - app-network
+
+  app:
+    image: invoice-project  # Use the built image here
+    container_name: invoice-app
+    restart: always
+    ports:
+      - '3000:3000'
+    depends_on:
+      - mongodb
+      - rabbitmq
+    networks:
+      - app-network
+
+volumes:
+  mongo-data:  # Named volume to persist data
+
+networks:
+  app-network:  # Isolated network for MongoDB service
