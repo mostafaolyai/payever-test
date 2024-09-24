@@ -1,13 +1,11 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { InvoicesService } from './invoices.service';
 import { getModelToken } from '@nestjs/mongoose';
-import { Model } from 'mongoose';
 import { Invoice } from '../../database/models/invoice';
 import { CreateInvoiceDto } from './dtos/create-invoice-dto';
 
 describe('InvoicesService', () => {
   let service: InvoicesService;
-  let model: Model<Invoice>;
 
   const mockInvoice = {
     customer: 'John Doe',
@@ -36,7 +34,6 @@ describe('InvoicesService', () => {
     }).compile();
 
     service = module.get<InvoicesService>(InvoicesService);
-    model = module.get<Model<Invoice>>(getModelToken(Invoice.name));
   });
 
   describe('create', () => {
