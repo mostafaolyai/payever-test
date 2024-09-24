@@ -6,7 +6,8 @@ Welcome to the **My NestJS App** project! This application is built using NestJS
 
 To get your application up and running, follow these simple steps:
 
-### 1. Build the Docker Image
+### -it will be exposed on localhost:3000
+### -Build the Docker Image
 
 Run the following command to build the Docker image:
 
