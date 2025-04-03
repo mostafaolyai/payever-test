@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import { Invoice } from '../../database/models/invoice';
@@ -15,7 +15,11 @@ export class InvoicesService {
   }
 
   async findOne(id: string): Promise<Invoice> {
-    return this.invoiceModel.findById(id);
+    const invoice = await this.invoiceModel.findById(id);
+
+    if (!invoice) throw new NotFoundException('Invoice notFound!');
+
+    return invoice;
   }
 
   async findAll(): Promise<Invoice[]> {
