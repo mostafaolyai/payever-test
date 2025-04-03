@@ -15,7 +15,7 @@ export class RabbitMQService {
       totalSales,
       itemSalesSummary,
     };
-    console.log(report);
+
     channel.sendToQueue(queue, Buffer.from(JSON.stringify(report)));
   }
 }

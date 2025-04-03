@@ -1,7 +1,7 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { InvoicesController } from './invoices.controller';
 import { InvoicesService } from './invoices.service';
-import { CreateInvoiceDto } from './dtos/create-invoice-dto';
+import { CreateInvoiceDto } from './dto/create-invoice-dto';
 import { Invoice } from '../../database/models/invoice';
 
 describe('InvoicesController', () => {

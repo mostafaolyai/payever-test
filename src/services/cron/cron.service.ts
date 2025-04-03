@@ -13,7 +13,6 @@ export class CronService {
 
   @Cron('* 12 * * *')
   async handleDailySalesReport() {
-    console.log('Start Cron Job');
     const invoices = await this.invoicesService.findAll();
     const totalSales = invoices.reduce(
       (sum, invoice) => sum + invoice.amount,
@@ -39,7 +38,6 @@ export class CronService {
   }
 
   publishSalesReport(totalSales: number, itemSalesSummary: any) {
-    console.log('Send to RabbitMQ');
     this.rabbitMQ.publish(totalSales, itemSalesSummary);
   }
 }

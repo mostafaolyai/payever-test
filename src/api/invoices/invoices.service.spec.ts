@@ -2,7 +2,7 @@ import { Test, TestingModule } from '@nestjs/testing';
 import { InvoicesService } from './invoices.service';
 import { getModelToken } from '@nestjs/mongoose';
 import { Invoice } from '../../database/models/invoice';
-import { CreateInvoiceDto } from './dtos/create-invoice-dto';
+import { CreateInvoiceDto } from './dto/create-invoice-dto';
 
 describe('InvoicesService', () => {
   let service: InvoicesService;
